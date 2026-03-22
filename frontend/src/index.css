@@ -1,0 +1,277 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✅ Your Pink Palette */
+:root {
+  --pink-1: #ff006e; /* hot pink */
+  --pink-2: #ff4da6; /* strong pink */
+  --pink-3: #ff85c2; /* soft pink */
+  --pink-4: #ffc2dd; /* pastel */
+  --pink-5: #ffe1f0; /* very light */
+
+  --bg-1: #12000b; /* deep berry background */
+  --bg-2: #1a0010; /* dark plum */
+  --card: rgba(255, 133, 194, 0.08);
+  --card2: rgba(255, 194, 221, 0.07);
+  --border: rgba(255, 77, 166, 0.28);
+
+  --text: #ffeaf6;
+  --muted: rgba(255, 234, 246, 0.7);
+  --muted2: rgba(255, 234, 246, 0.55);
+
+  --shadow: 0 20px 60px rgba(255, 0, 110, 0.15);
+  --glow: 0 0 30px rgba(255, 0, 110, 0.22);
+
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* ✅ Remove horizontal overflow */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* ✅ FULL BACKGROUND in your palette */
+body {
+  background:
+    radial-gradient(900px 550px at 15% 10%, rgba(255, 0, 110, 0.25), transparent 55%),
+    radial-gradient(800px 450px at 85% 0%, rgba(255, 77, 166, 0.18), transparent 55%),
+    radial-gradient(900px 500px at 65% 70%, rgba(255, 133, 194, 0.14), transparent 60%),
+    linear-gradient(180deg, var(--bg-2), var(--bg-1));
+  color: var(--text);
+}
+
+/* ✅ Global */
+* {
+  box-sizing: border-box;
+}
+
+/* ✅ Prevent overflow issues */
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+}
+
+/* ✅ Better readability for long content */
+.break-safe {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* =========================================================
+   ✅ FORCE ALL "slate" CARD COLORS TO GIRLY PINK THEME
+   This auto-fixes your entire dashboard without editing JSX.
+========================================================= */
+
+/* cards / panels */
+.bg-slate-900,
+.bg-slate-950 {
+  background: linear-gradient(180deg, var(--card), var(--card2)) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+/* borders */
+.border-slate-800,
+.border-slate-700 {
+  border-color: var(--border) !important;
+}
+
+/* text shades */
+.text-slate-200,
+.text-slate-300,
+.text-slate-400,
+.text-slate-500 {
+  color: var(--muted) !important;
+}
+
+.text-white {
+  color: var(--text) !important;
+}
+
+/* pills */
+.bg-slate-800 {
+  background: rgba(255, 194, 221, 0.10) !important;
+  border: 1px solid rgba(255, 77, 166, 0.22) !important;
+  box-shadow: var(--glow);
+}
+
+/* =========================================================
+   ✅ BUTTONS: Make all key actions pink automatically
+========================================================= */
+
+.bg-indigo-600,
+.bg-emerald-600 {
+  background: linear-gradient(90deg, var(--pink-1), var(--pink-2)) !important;
+  color: white !important;
+  box-shadow: 0 10px 30px rgba(255, 0, 110, 0.22) !important;
+}
+
+.hover\:bg-indigo-500:hover,
+.hover\:bg-emerald-500:hover {
+  filter: brightness(1.08);
+}
+
+/* small buttons */
+.bg-red-700,
+.bg-rose-700 {
+  background: linear-gradient(90deg, #ff3d7f, #ff006e) !important;
+  color: white !important;
+}
+
+/* =========================================================
+   ✅ INPUTS / SELECTS / DROPDOWNS (Fix white dropdown issue)
+========================================================= */
+
+input,
+textarea,
+select {
+  background: rgba(255, 194, 221, 0.08) !important;
+  border: 1px solid rgba(255, 77, 166, 0.28) !important;
+  color: var(--text) !important;
+  outline: none !important;
+}
+
+/* dropdown options */
+select option {
+  background: #2a0018 !important;
+  color: #ffeaf6 !important;
+}
+
+/* placeholder */
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 234, 246, 0.45) !important;
+}
+
+/* focus glow */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: rgba(255, 0, 110, 0.7) !important;
+  box-shadow: 0 0 0 4px rgba(255, 0, 110, 0.18) !important;
+}
+
+/* =========================================================
+   ✅ CHECKBOXES / RADIO - make them pink too
+========================================================= */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--pink-1);
+}
+
+/* =========================================================
+   ✅ FIX TIMELINE TAGS / BADGES BETTER CONTRAST
+========================================================= */
+.rounded-full {
+  border-color: rgba(255, 77, 166, 0.28) !important;
+}
+
+/* =========================================================
+   ✅ RECHARTS TEXT (Graph axis text is usually dull)
+========================================================= */
+.recharts-text {
+  fill: rgba(255, 234, 246, 0.72) !important;
+}
+
+.recharts-cartesian-grid line {
+  stroke: rgba(255, 194, 221, 0.18) !important;
+}
+
+.recharts-tooltip-wrapper {
+  filter: drop-shadow(0 12px 25px rgba(255, 0, 110, 0.25));
+}
+
+.recharts-default-tooltip {
+  background: rgba(42, 0, 24, 0.92) !important;
+  border: 1px solid rgba(255, 77, 166, 0.30) !important;
+  color: var(--text) !important;
+}
+
+/* =========================================================
+   ✅ MODAL BACKGROUND
+========================================================= */
+.fixed.inset-0.bg-black\/60 {
+  background: rgba(18, 0, 11, 0.75) !important;
+}
+
+/* =========================================================
+   ✅ SCROLLBAR (looks aesthetic girly)
+========================================================= */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 194, 221, 0.06);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--pink-2), var(--pink-1));
+  border-radius: 999px;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* ✅ makes section scroll stop below sticky navbar */
+section {
+  scroll-margin-top: 140px;
+}
+/* ✅ Current day embossed 3D highlight */
+.today-emboss {
+  position: relative;
+  transform: translateY(-2px);
+  border: 1px solid rgba(255, 0, 110, 0.7) !important;
+  box-shadow:
+    0 18px 50px rgba(255, 0, 110, 0.20),
+    0 0 0 3px rgba(255, 0, 110, 0.18),
+    inset 0 2px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -10px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+
+/* ✅ Current Day Emboss / 3D Card */
+.today-emboss {
+  position: relative;
+  transform: translateY(-3px);
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.50),
+    0 0 0 3px rgba(255, 255, 255, 0.12),
+    inset 0 2px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -12px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* ✅ Shine layer */
+.today-emboss::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15),
+    transparent 35%,
+    rgba(255, 0, 110, 0.08)
+  );
+  pointer-events: none;
+}
+
+/* ✅ Glow layer (soft pink highlight) */
+.today-emboss::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255, 0, 110, 0.35),
+    transparent 55%
+  );
+  filter: blur(10px);
+  opacity: 0.65;
+  pointer-events: none;
+}
