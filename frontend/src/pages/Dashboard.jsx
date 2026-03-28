@@ -171,11 +171,13 @@ export default function Dashboard({ profileId, onResetProfile, onViewWorkplace }
 
       {/* ── Sticky Navigation ── */}
       <div className="sticky top-3 z-40">
-        <div className="w-full rounded-2xl border border-slate-800 bg-slate-900/80 backdrop-blur-md px-4 py-3 flex items-center justify-between gap-3">
+
+        {/* CHANGE 1+2+3: Tighter padding, smaller logo, icon-only buttons on mobile */}
+        <div className="w-full rounded-2xl border border-slate-800 bg-slate-900/80 backdrop-blur-md px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-2">
 
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="text-xl sm:text-2xl font-extrabold text-white whitespace-nowrap">
+            <div className="text-sm sm:text-xl md:text-2xl font-extrabold text-white whitespace-nowrap">
               🎀 She Pulse 💖
             </div>
           </div>
@@ -202,20 +204,21 @@ export default function Dashboard({ profileId, onResetProfile, onViewWorkplace }
             ))}
           </div>
 
-          {/* Right buttons */}
+          {/* Right buttons — icon only on mobile, full text on sm+ */}
           <div className="flex items-center gap-2">
-            {/* ✅ Workplace View button */}
             <button
               onClick={onViewWorkplace}
-              className="px-4 py-2 rounded-xl bg-emerald-600/20 border border-emerald-500/40 hover:bg-emerald-600/30 transition text-sm font-semibold text-emerald-300 whitespace-nowrap"
+              className="px-2 sm:px-4 py-2 rounded-xl bg-emerald-600/20 border border-emerald-500/40 hover:bg-emerald-600/30 transition text-xs sm:text-sm font-semibold text-emerald-300 whitespace-nowrap"
             >
-              🏢 Workplace View
+              <span className="sm:hidden">🏢</span>
+              <span className="hidden sm:inline">🏢 Workplace View</span>
             </button>
             <button
               onClick={onResetProfile}
-              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 transition text-sm font-semibold whitespace-nowrap"
+              className="px-2 sm:px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 transition text-xs sm:text-sm font-semibold whitespace-nowrap"
             >
-              Reset Profile
+              <span className="sm:hidden">↺</span>
+              <span className="hidden sm:inline">Reset Profile</span>
             </button>
           </div>
         </div>
@@ -240,7 +243,6 @@ export default function Dashboard({ profileId, onResetProfile, onViewWorkplace }
               {label}
             </button>
           ))}
-          {/* ✅ Mobile workplace button */}
           <button
             onClick={onViewWorkplace}
             className="px-3 py-2 rounded-xl bg-emerald-600/20 border border-emerald-500/40 hover:bg-emerald-600/30 transition text-xs font-semibold whitespace-nowrap text-emerald-300"
@@ -253,18 +255,18 @@ export default function Dashboard({ profileId, onResetProfile, onViewWorkplace }
       {/* ── Main Content ── */}
       <div className="w-full max-w-[1400px] mx-auto grid gap-4">
 
-        {/* Banner */}
-        <section id="sec-banner" className="scroll-mt-28">
+        {/* Banner — CHANGE 4: scroll-mt responsive */}
+        <section id="sec-banner" className="scroll-mt-20 sm:scroll-mt-28">
           <ThemeBanner theme={theme} plan={plan} />
         </section>
 
-        {/* Calendar */}
-        <section id="sec-calendar" className="scroll-mt-28">
+        {/* Calendar — CHANGE 4 */}
+        <section id="sec-calendar" className="scroll-mt-20 sm:scroll-mt-28">
           <CycleCalendar days={cycleDays} loading={loadingCycle} />
         </section>
 
-        {/* Widgets */}
-        <section id="sec-widgets" className="scroll-mt-28">
+        {/* Widgets — CHANGE 4 */}
+        <section id="sec-widgets" className="scroll-mt-20 sm:scroll-mt-28">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <CycleWheel plan={plan} />
             <PeriodCountdownCard plan={plan} />
@@ -272,12 +274,13 @@ export default function Dashboard({ profileId, onResetProfile, onViewWorkplace }
           </div>
         </section>
 
-        {/* Energy Trend */}
-        <section id="sec-trend" className="scroll-mt-28">
+        {/* Energy Trend — CHANGE 4 + CHANGE 5 */}
+        <section id="sec-trend" className="scroll-mt-20 sm:scroll-mt-28">
           <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
-            <div className="flex items-start justify-between gap-3">
+            {/* CHANGE 5: flex-wrap on trend header */}
+            <div className="flex items-start justify-between gap-2 flex-wrap">
               <div>
-                <h2 className="text-xl font-semibold">Energy Trend</h2>
+                <h2 className="text-lg sm:text-xl font-semibold">Energy Trend</h2>
                 <p className="text-slate-300 text-sm mt-1">
                   Previous days energy score visualization
                 </p>
@@ -316,8 +319,8 @@ export default function Dashboard({ profileId, onResetProfile, onViewWorkplace }
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
 
-          {/* Plan */}
-          <section id="sec-plan" className="scroll-mt-28 lg:col-span-2">
+          {/* Plan — CHANGE 4 */}
+          <section id="sec-plan" className="scroll-mt-20 sm:scroll-mt-28 lg:col-span-2">
             <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                 <div>
@@ -375,8 +378,8 @@ export default function Dashboard({ profileId, onResetProfile, onViewWorkplace }
           {/* Right stack */}
           <div className="grid gap-4">
 
-            {/* Check-in */}
-            <section id="sec-checkin" className="scroll-mt-28">
+            {/* Check-in — CHANGE 4 */}
+            <section id="sec-checkin" className="scroll-mt-20 sm:scroll-mt-28">
               <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
                 <h2 className="text-xl font-semibold">Daily Check-in</h2>
                 <p className="text-slate-300 text-sm mt-1">
@@ -391,13 +394,13 @@ export default function Dashboard({ profileId, onResetProfile, onViewWorkplace }
               </div>
             </section>
 
-            {/* Chat */}
-            <section id="sec-chat" className="scroll-mt-28">
+            {/* Chat — CHANGE 4 */}
+            <section id="sec-chat" className="scroll-mt-20 sm:scroll-mt-28">
               <CareChat profileId={profileId} />
             </section>
 
-            {/* Tasks */}
-            <section id="sec-tasks" className="scroll-mt-28">
+            {/* Tasks — CHANGE 4 */}
+            <section id="sec-tasks" className="scroll-mt-20 sm:scroll-mt-28">
               <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
                 <div className="flex items-start justify-between gap-3">
                   <div>

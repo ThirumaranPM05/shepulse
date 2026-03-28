@@ -68,7 +68,7 @@ export default function CycleCalendar({ days = [], loading = false }) {
         </div>
       ) : (
         <>
-          {/* ✨ TODAY HERO CARD */}
+          {/* ✨ TODAY HERO CARD — unchanged, works fine on mobile already */}
           {todayData && (
             <div
               className={`mt-5 relative overflow-hidden rounded-2xl border-2 ${accent.border} bg-gradient-to-br ${phaseGradient(todayData.phase)} shadow-2xl p-5`}
@@ -118,9 +118,12 @@ export default function CycleCalendar({ days = [], loading = false }) {
             </div>
           )}
 
-          {/* Calendar grid — auto-scrolls to today */}
+          {/* CHANGE 1: Calendar grid
+              - Mobile: grid-cols-4, no min-width forcing horizontal scroll
+              - Desktop (sm+): grid-cols-7, min-w-[700px] restored for full view
+              The ref/auto-scroll still works because scrollRef wraps both */}
           <div ref={scrollRef} className="mt-5 overflow-x-auto">
-            <div className="min-w-[700px] grid grid-cols-7 gap-4 py-2">
+            <div className="grid grid-cols-4 sm:grid-cols-7 min-w-0 sm:min-w-[700px] gap-2 sm:gap-4 py-2">
               {days.map((d) => {
                 const isToday = d.is_today === true || d.is_today === "true" || d.is_today === 1;
                 const a = phaseAccent(d.phase);
@@ -131,30 +134,33 @@ export default function CycleCalendar({ days = [], loading = false }) {
                     ref={isToday ? todayRef : null}
                     className={`rounded-xl border transition-all duration-200
                       ${isToday
-                       ? `p-3 shadow-xl bg-gradient-to-b ${phaseGradient(d.phase)} border-2 ${a.border}`
-                        : `p-2 ${phaseColor(d.phase)} hover:scale-[1.02] hover:opacity-90`}
+                        ? `p-2 sm:p-3 shadow-xl bg-gradient-to-b ${phaseGradient(d.phase)} border-2 ${a.border}`
+                        : `p-1.5 sm:p-2 ${phaseColor(d.phase)} hover:scale-[1.02] hover:opacity-90`}
                     `}
                   >
-                    <div className={`text-[11px] ${isToday ? "text-white/70 font-semibold" : "text-slate-200"}`}>
+                    {/* CHANGE 2: Smaller text on mobile, phase name hidden on mobile tiles
+                        (phase is already shown in the hero card above) */}
+                    <div className={`text-[9px] sm:text-[11px] ${isToday ? "text-white/70 font-semibold" : "text-slate-200"}`}>
                       {d.date.slice(5)}
                     </div>
-                    <div className={`font-semibold mt-1 ${isToday ? "text-base text-white" : "text-sm"}`}>
-                      Day {d.cycle_day}
+                    <div className={`font-semibold mt-0.5 sm:mt-1 ${isToday ? "text-xs sm:text-base text-white" : "text-[10px] sm:text-sm"}`}>
+                      D{d.cycle_day}
                     </div>
-                    <div className={`mt-1 ${isToday ? "text-xs font-bold " + a.text : "text-[10px]"}`}>
+                    <div className={`mt-0.5 sm:mt-1 hidden sm:block ${isToday ? "text-xs font-bold " + a.text : "text-[10px]"}`}>
                       {isToday ? phaseEmoji(d.phase) + " " : ""}{d.phase}
                     </div>
                     {isToday && (
                       <>
-                        <p className="mt-2 text-[10px] text-white/60 leading-relaxed">
+                        <p className="mt-2 text-[10px] text-white/60 leading-relaxed hidden sm:block">
                           {phaseDescription(d.phase)}
                         </p>
-                        <div className={`mt-2 flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full border w-fit ${a.badge}`}>
+                        <div className={`mt-1 sm:mt-2 flex items-center gap-1 text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full border w-fit ${a.badge}`}>
                           <span className="relative flex h-1.5 w-1.5">
                             <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${a.dot}`} />
                             <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${a.dot}`} />
                           </span>
-                          Today
+                          <span className="hidden sm:inline">Today</span>
+                          <span className="sm:hidden">•</span>
                         </div>
                       </>
                     )}
@@ -164,7 +170,7 @@ export default function CycleCalendar({ days = [], loading = false }) {
             </div>
           </div>
 
-          {/* Legend */}
+          {/* Legend — unchanged, flex-wrap already handles mobile */}
           <div className="mt-4 flex flex-wrap gap-2 text-xs">
             <span className="px-2 py-1 rounded-full bg-red-600/20 border border-red-500/40">🌑 Menstrual</span>
             <span className="px-2 py-1 rounded-full bg-emerald-600/15 border border-emerald-500/30">🌱 Follicular</span>
